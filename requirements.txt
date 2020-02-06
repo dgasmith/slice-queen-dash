@@ -1,3 +1,7 @@
 dash
 plotly
 gunicorn
+dash-core-components
+dash-html-components
+dash-bootstrap-components
+flask-caching
