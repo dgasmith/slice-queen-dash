@@ -89,12 +89,35 @@ for sl in slices:
                     ]
                 ),
             ]
-        )
+        ),
+        className="border-primary",
     )
     choices.append(card)
 
 
-index_page = dbc.Container(dbc.CardColumns(choices, className="mt-4"))
+index_page = html.Div(
+    [
+        dbc.Row(dbc.CardColumns(choices, className="mb-4")),
+        dbc.Row(
+            [
+                dbc.Card(
+                    [
+                        html.P(
+                            "Each slice is about 5 x 5 inches, we normally recommend two slices.",
+                            className="text-center",
+                        ),
+                    ],
+                    style={"width": "100%"},
+                    color="primary",
+                    inverse=True,
+                    className="border-secondary",
+                )
+            ],
+            className="mb-4",
+        ),
+    ]
+)
+index_page = dbc.Container(index_page)
 
 # app.layout = html.Div([navbar, body])
 app.layout = html.Div(
@@ -134,7 +157,6 @@ def build_callback(uid):
 
         cache.set(data["uuid"], data)
         session.modified = True
-#        print(session["uuid"], uid, session[uid])
 
         users = cache.get("users")
         if users is None:
@@ -168,8 +190,8 @@ def build_graph(id):
         for k, v in counts.items():
             output[k] += v
 
-    output.pop('uuid')
-    output.pop('_permanent')
+    output.pop("uuid")
+    output.pop("_permanent")
 
     x, y = [], []
     for k, v in output.items():
